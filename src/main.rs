@@ -1,11 +1,10 @@
-use std::fs;
+mod z;
 
 fn main() {
-    let _z_data: &str = &(env!("HOME").to_string() + "/.z");
-    if let Err(_) = fs::read(_z_data) {
-        println!("ERROR: z.sh's datafile {} is not a file.", _z_data);
-        return;
+    if let Some(_z_data) = z::data_path() {
+        println!("datafile:{:?}", _z_data);
+        println!("paths:{:?}", z::_z_dirs(_z_data.as_str()));
+    } else {
+        println!("!");
     }
-
-    println!("ok")
 }
